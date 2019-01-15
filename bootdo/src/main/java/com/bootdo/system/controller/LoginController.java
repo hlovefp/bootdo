@@ -1,6 +1,5 @@
 package com.bootdo.system.controller;
 
-import com.bootdo.common.annotation.Log;
 import com.bootdo.common.config.BootdoConfig;
 import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.domain.FileDO;
@@ -9,6 +8,7 @@ import com.bootdo.common.service.FileService;
 import com.bootdo.common.utils.MD5Utils;
 import com.bootdo.common.utils.R;
 import com.bootdo.common.utils.ShiroUtils;
+import com.bootdo.log.annotation.Log;
 import com.bootdo.system.domain.MenuDO;
 import com.bootdo.system.service.MenuService;
 import io.swagger.models.auth.In;

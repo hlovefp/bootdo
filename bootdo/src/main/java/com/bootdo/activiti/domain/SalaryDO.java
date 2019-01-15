@@ -1,10 +1,8 @@
 package com.bootdo.activiti.domain;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
 import java.io.Serializable;
 import java.util.Date;
-
 
 
 /**
@@ -14,7 +12,7 @@ import java.util.Date;
  * @email 1992lcg@163.com
  * @date 2017-11-25 13:28:58
  */
-public class SalaryDO extends  TaskDO implements Serializable  {
+public class SalaryDO extends TaskDO implements Serializable  {
 	private static final long serialVersionUID = 1L;
 	
 	//编号

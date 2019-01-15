@@ -1,11 +1,11 @@
-package com.bootdo.common.dao;
-
-import com.bootdo.common.domain.TaskDO;
+package com.bootdo.schedule.dao;
 
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+
+import com.bootdo.schedule.domain.TaskDO;
 
 /**
  * 

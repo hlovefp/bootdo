@@ -1,11 +1,13 @@
-package com.bootdo.common.controller;
+package com.bootdo.schedule.controller;
 
 import com.bootdo.common.config.Constant;
-import com.bootdo.common.domain.TaskDO;
-import com.bootdo.common.service.JobService;
+import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
 import com.bootdo.common.utils.R;
+import com.bootdo.schedule.domain.TaskDO;
+import com.bootdo.schedule.service.JobService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,12 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
-/**
- * 
- * @author chglee
- * @email 1992lcg@163.com
- * @date 2017-09-26 20:53:48
- */
+
 @Controller
 @RequestMapping("/common/job")
 public class JobController extends BaseController{

@@ -1,9 +1,9 @@
 package com.bootdo.system.controller;
 
-import com.bootdo.common.annotation.Log;
 import com.bootdo.common.config.Constant;
 import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.utils.R;
+import com.bootdo.log.annotation.Log;
 import com.bootdo.system.domain.RoleDO;
 import com.bootdo.system.service.RoleService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;

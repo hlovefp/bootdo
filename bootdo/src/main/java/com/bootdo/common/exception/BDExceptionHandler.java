@@ -1,12 +1,12 @@
 package com.bootdo.common.exception;
 
 import com.bootdo.common.config.Constant;
-import com.bootdo.common.domain.LogDO;
-import com.bootdo.common.service.LogService;
 import com.bootdo.common.utils.ExceptionUtils;
 import com.bootdo.common.utils.HttpServletUtils;
 import com.bootdo.common.utils.R;
 import com.bootdo.common.utils.ShiroUtils;
+import com.bootdo.log.domain.LogDO;
+import com.bootdo.log.service.LogService;
 import com.bootdo.system.domain.UserDO;
 import org.apache.shiro.authz.AuthorizationException;
 import org.slf4j.Logger;

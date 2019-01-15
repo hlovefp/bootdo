@@ -1,6 +1,5 @@
-package com.bootdo.common.quartz.utils;
+package com.bootdo.schedule.quartz.utils;
 
-import com.bootdo.common.domain.ScheduleJob;
 import org.quartz.*;
 import org.quartz.DateBuilder.IntervalUnit;
 import org.quartz.impl.matchers.GroupMatcher;
@@ -8,6 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.bootdo.schedule.domain.ScheduleJob;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,24 +37,30 @@ public class QuartzManager {
 	 * @param scheduleJob
 	 * @throws SchedulerException
 	 */
-	
 	public void addJob(ScheduleJob job) {
 		try {
 			// 创建jobDetail实例，绑定Job实现类
 			// 指明job的名称，所在组的名称，以及绑定job类
-
-			Class<? extends Job> jobClass = (Class<? extends Job>) (Class.forName(job.getBeanClass()).newInstance()
-					.getClass());
-			JobDetail jobDetail = JobBuilder.newJob(jobClass).withIdentity(job.getJobName(), job.getJobGroup())// 任务名称和组构成任务key
+			Class<? extends Job> jobClass = 
+				(Class<? extends Job>) (Class.forName(job.getBeanClass()).newInstance().getClass());
+			
+			JobDetail jobDetail = JobBuilder.newJob(jobClass)
+					.withIdentity(job.getJobName(), job.getJobGroup())        // 任务名称和组构成任务key
 					.build();
+					
 			// 定义调度触发规则
 			// 使用cornTrigger规则
-			Trigger trigger = TriggerBuilder.newTrigger().withIdentity(job.getJobName(), job.getJobGroup())// 触发器key
+			Trigger trigger = TriggerBuilder.newTrigger()
+					.withIdentity(job.getJobName(), job.getJobGroup())         // 触发器key
 					.startAt(DateBuilder.futureDate(1, IntervalUnit.SECOND))
-					.withSchedule(CronScheduleBuilder.cronSchedule(job.getCronExpression())).startNow().build();
+					.withSchedule(CronScheduleBuilder.cronSchedule(job.getCronExpression()))
+					.startNow()
+					.build();
+
 			// 把作业和触发器注册到任务调度中
 			scheduler.scheduleJob(jobDetail, trigger);
-			// 启动
+			
+			// 只启动一次
 			if (!scheduler.isShutdown()) {
 				scheduler.start();
 			}

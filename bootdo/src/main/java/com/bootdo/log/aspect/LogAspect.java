@@ -1,4 +1,4 @@
-package com.bootdo.common.aspect;
+package com.bootdo.log.aspect;
 
 import java.lang.reflect.Method;
 import java.util.Date;
@@ -8,7 +8,6 @@ import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.bootdo.common.service.LogService;
 import com.bootdo.system.domain.UserToken;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -21,13 +20,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
-import com.bootdo.common.annotation.Log;
-import com.bootdo.common.dao.LogDao;
-import com.bootdo.common.domain.LogDO;
 import com.bootdo.common.utils.HttpContextUtils;
 import com.bootdo.common.utils.IPUtils;
 import com.bootdo.common.utils.JSONUtils;
 import com.bootdo.common.utils.ShiroUtils;
+import com.bootdo.log.annotation.Log;
+import com.bootdo.log.dao.LogDao;
+import com.bootdo.log.domain.LogDO;
+import com.bootdo.log.service.LogService;
 import com.bootdo.system.domain.UserDO;
 
 @Aspect
@@ -39,19 +39,16 @@ public class LogAspect {
     LogService logService;
 
 
-    @Pointcut("@annotation(com.bootdo.common.annotation.Log)")
+    @Pointcut("@annotation(com.bootdo.log.annotation.Log)")
     public void logPointCut() {
     }
 
     @Around("logPointCut()")
     public Object around(ProceedingJoinPoint point) throws Throwable {
         long beginTime = System.currentTimeMillis();
-        // 执行方法
-        Object result = point.proceed();
-        // 执行时长(毫秒)
-        long time = System.currentTimeMillis() - beginTime;
-        //异步保存日志
-        saveLog(point, time);
+        Object result = point.proceed();                    // 执行方法
+        long time = System.currentTimeMillis() - beginTime; // 执行时长(毫秒)
+        saveLog(point, time);                               // 异步保存日志
         return result;
     }
 
@@ -61,8 +58,7 @@ public class LogAspect {
         LogDO sysLog = new LogDO();
         Log syslog = method.getAnnotation(Log.class);
         if (syslog != null) {
-            // 注解上的描述
-            sysLog.setOperation(syslog.value());
+            sysLog.setOperation(syslog.value());     // 注解上的描述
         }
         // 请求的方法名
         String className = joinPoint.getTarget().getClass().getName();
@@ -76,12 +72,10 @@ public class LogAspect {
         } catch (Exception e) {
 
         }
-        // 获取request
-        HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
-        // 设置IP地址
-        sysLog.setIp(IPUtils.getIpAddr(request));
-        // 用户名
-        UserDO currUser = ShiroUtils.getUser();
+        
+        HttpServletRequest request = HttpContextUtils.getHttpServletRequest();  // 获取request
+        sysLog.setIp(IPUtils.getIpAddr(request));    // 设置IP地址
+        UserDO currUser = ShiroUtils.getUser();      // 用户名
         if (null == currUser) {
             if (null != sysLog.getParams()) {
                 sysLog.setUserId(-1L);

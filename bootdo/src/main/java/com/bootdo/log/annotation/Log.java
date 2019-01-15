@@ -1,4 +1,4 @@
-package com.bootdo.common.annotation;
+package com.bootdo.log.annotation;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.ElementType;

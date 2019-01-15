@@ -1,4 +1,4 @@
-package com.bootdo.common.domain;
+package com.bootdo.log.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

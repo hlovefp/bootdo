@@ -5,7 +5,7 @@ import com.bootdo.common.config.Constant;
 import com.bootdo.common.redis.shiro.RedisCacheManager;
 import com.bootdo.common.redis.shiro.RedisManager;
 import com.bootdo.common.redis.shiro.RedisSessionDAO;
-import com.bootdo.system.shiro.UserRealm;
+
 //import org.apache.shiro.cache.CacheManager;
 import net.sf.ehcache.CacheManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
@@ -68,12 +68,15 @@ public class ShiroConfig {
     @Bean
     ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
+        
         shiroFilterFactoryBean.setSecurityManager(securityManager);
-        shiroFilterFactoryBean.setLoginUrl("/login");
-        shiroFilterFactoryBean.setSuccessUrl("/index");
-        shiroFilterFactoryBean.setUnauthorizedUrl("/403");
+        shiroFilterFactoryBean.setLoginUrl("/login");       // 没有登录的用户请求需要登录的页面时自动跳转到登录页面
+        shiroFilterFactoryBean.setSuccessUrl("/index");     // 登录成功默认跳转页面，不配置则跳转至"/"
+        shiroFilterFactoryBean.setUnauthorizedUrl("/403");  // 登录的用户访问了没有被授权的资源自动跳转到的页面
+        
+        // 配置过滤规则，从上到下的顺序匹配
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-        filterChainDefinitionMap.put("/login","anon");
+        filterChainDefinitionMap.put("/login","anon");         // anon:  url可以匿名访问
         filterChainDefinitionMap.put("/css/**", "anon");
         filterChainDefinitionMap.put("/js/**", "anon");
         filterChainDefinitionMap.put("/fonts/**", "anon");
@@ -82,12 +85,13 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/druid/**", "anon");
         filterChainDefinitionMap.put("/upload/**", "anon");
         filterChainDefinitionMap.put("/files/**", "anon");
-        filterChainDefinitionMap.put("/logout", "logout");
+        filterChainDefinitionMap.put("/logout", "logout");      // logout 
         filterChainDefinitionMap.put("/", "anon");
         filterChainDefinitionMap.put("/blog", "anon");
         filterChainDefinitionMap.put("/blog/open/**", "anon");
-        filterChainDefinitionMap.put("/**", "authc");
+        filterChainDefinitionMap.put("/**", "authc");           // authc:  url必须认证通过才可以访问
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
+        
         return shiroFilterFactoryBean;
     }
 
@@ -95,8 +99,8 @@ public class ShiroConfig {
     @Bean
     public SecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        //设置realm.
-        securityManager.setRealm(userRealm());
+        
+        securityManager.setRealm(userRealm());   //设置realm.
         // 自定义缓存实现 使用redis
         if (Constant.CACHE_TYPE_REDIS.equals(cacheType)) {
             securityManager.setCacheManager(rediscacheManager());
@@ -137,7 +141,7 @@ public class ShiroConfig {
         RedisManager redisManager = new RedisManager();
         redisManager.setHost(host);
         redisManager.setPort(port);
-        redisManager.setExpire(1800);// 配置缓存过期时间
+        redisManager.setExpire(1800);     // 配置缓存过期时间
         //redisManager.setTimeout(1800);
         redisManager.setPassword(password);
         return redisManager;

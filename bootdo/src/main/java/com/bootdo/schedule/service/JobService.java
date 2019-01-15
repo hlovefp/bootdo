@@ -1,11 +1,11 @@
-package com.bootdo.common.service;
-
-import com.bootdo.common.domain.TaskDO;
+package com.bootdo.schedule.service;
 
 import java.util.List;
 import java.util.Map;
 
 import org.quartz.SchedulerException;
+
+import com.bootdo.schedule.domain.TaskDO;
 
 /**
  * 

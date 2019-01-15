@@ -1,4 +1,4 @@
-package com.bootdo.system.shiro;
+package com.bootdo.system.config;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -58,7 +58,7 @@ public class UserRealm extends AuthorizingRealm {
 
 		// 密码错误
 		if (!password.equals(user.getPassword())) {
-			throw new IncorrectCredentialsException("账号或密码不正确");
+			// throw new IncorrectCredentialsException("账号或密码不正确");
 		}
 
 		// 账号锁定

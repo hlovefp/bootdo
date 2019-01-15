@@ -1,12 +1,13 @@
-package com.bootdo.common.service.impl;
+package com.bootdo.schedule.service.impl;
 
 import com.bootdo.common.config.Constant;
-import com.bootdo.common.dao.TaskDao;
-import com.bootdo.common.domain.ScheduleJob;
-import com.bootdo.common.domain.TaskDO;
-import com.bootdo.common.quartz.utils.QuartzManager;
-import com.bootdo.common.service.JobService;
-import com.bootdo.common.utils.ScheduleJobUtils;
+import com.bootdo.schedule.dao.TaskDao;
+import com.bootdo.schedule.domain.ScheduleJob;
+import com.bootdo.schedule.domain.TaskDO;
+import com.bootdo.schedule.quartz.utils.QuartzManager;
+import com.bootdo.schedule.service.JobService;
+import com.bootdo.schedule.utils.ScheduleJobUtils;
+
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

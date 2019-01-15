@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.bootdo.common.domain.LogDO;
 import com.bootdo.common.domain.PageDO;
-import com.bootdo.common.service.LogService;
 import com.bootdo.common.utils.Query;
 import com.bootdo.common.utils.R;
+import com.bootdo.log.domain.LogDO;
+import com.bootdo.log.service.LogService;
 
 @RequestMapping("/common/log")
 @Controller

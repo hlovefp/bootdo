@@ -1,4 +1,4 @@
-package com.bootdo.common.domain;
+package com.bootdo.schedule.domain;
 
 import java.io.Serializable;
 import java.util.Date;

@@ -1,12 +1,12 @@
-package com.bootdo.common.listenner;
+package com.bootdo.schedule.listenner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import com.bootdo.common.quartz.utils.QuartzManager;
-import com.bootdo.common.service.JobService;
+import com.bootdo.schedule.quartz.utils.QuartzManager;
+import com.bootdo.schedule.service.JobService;
 
 @Component
 @Order(value = 1)
