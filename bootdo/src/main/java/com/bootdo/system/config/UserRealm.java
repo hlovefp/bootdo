@@ -5,11 +5,9 @@ import java.util.Map;
 import java.util.Set;
 
 import com.bootdo.common.config.ApplicationContextRegister;
-import com.bootdo.system.domain.UserToken;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -17,8 +15,6 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.bootdo.common.utils.ShiroUtils;
 import com.bootdo.system.dao.UserDao;
 import com.bootdo.system.domain.UserDO;
@@ -68,5 +64,4 @@ public class UserRealm extends AuthorizingRealm {
 		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user, password, getName());
 		return info;
 	}
-
 }
