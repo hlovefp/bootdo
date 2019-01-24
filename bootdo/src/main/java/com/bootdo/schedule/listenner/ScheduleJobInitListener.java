@@ -25,7 +25,5 @@ public class ScheduleJobInitListener implements CommandLineRunner {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
-
 }

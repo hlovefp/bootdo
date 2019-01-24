@@ -9,14 +9,13 @@ import org.activiti.engine.*;
 import org.activiti.engine.history.HistoricActivityInstance;
 import org.activiti.engine.history.HistoricProcessInstance;
 import org.activiti.engine.impl.RepositoryServiceImpl;
-import org.activiti.engine.impl.context.Context;
 import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
 import org.activiti.engine.impl.pvm.PvmTransition;
 import org.activiti.engine.impl.pvm.process.ActivityImpl;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.activiti.image.ProcessDiagramGenerator;
-import org.activiti.spring.ProcessEngineFactoryBean;
+//import org.activiti.spring.ProcessEngineFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,8 +41,8 @@ public class ActTaskServiceImpl implements ActTaskService {
     @Autowired
     RepositoryService repositoryService;
 
-    @Autowired
-    private ProcessEngineFactoryBean processEngineFactory;
+    // @Autowired
+    // private ProcessEngineFactoryBean processEngineFactory;
 
     @Autowired
     private ProcessEngine processEngine;
@@ -53,7 +52,7 @@ public class ActTaskServiceImpl implements ActTaskService {
 
     @Override
     public List<ActivitiDO> listTodo(ActivitiDO act) {
-        String userId = String.valueOf(ShiroUtils.getUserId());
+        // String userId = String.valueOf(ShiroUtils.getUserId());
         List<ActivitiDO> result = new ArrayList<ActivitiDO>();
         return result;
     }
@@ -91,13 +90,11 @@ public class ActTaskServiceImpl implements ActTaskService {
     @Override
     public void complete(String taskId, Map<String, Object> vars) {
         // 2.1根据人物ID查询流程实力ID
-        Task task = taskService.createTaskQuery()
-                .taskId(taskId).singleResult();
+        Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
         // 获取流程实例ID
         String processInstance = task.getProcessInstanceId();
         // 2.2根据流程实例ID，人物ID，评论的消息，保存教师或者学术对与该学生申请的评论信息
-//        taskService.addComment(taskId,
-//                processInstance, "");
+//        taskService.addComment(taskId, processInstance, "");
 //        Map<String,Object> vars = new HashMap<>();
 //        vars.put("pass",  "1" );
 //        vars.put("title","");

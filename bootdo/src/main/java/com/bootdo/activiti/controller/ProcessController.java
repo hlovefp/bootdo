@@ -8,7 +8,6 @@ import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.R;
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.RepositoryService;
-import org.activiti.engine.RuntimeService;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.apache.commons.io.FilenameUtils;
@@ -37,8 +36,8 @@ public class ProcessController extends BaseController{
     @Autowired
     private ProcessService processService;
 
-    @Autowired
-    private RuntimeService runtimeService;
+    // @Autowired
+    // private RuntimeService runtimeService;
 
     @GetMapping
     ModelAndView process() {

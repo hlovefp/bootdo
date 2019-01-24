@@ -1,4 +1,4 @@
-package com.bootdo.common.config;
+package com.bootdo.schedule.config;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -18,7 +18,6 @@ public class QuartzConfigration {
 
 	@Autowired
 	JobFactory jobFactory;
-
 
 	@Bean
 	public SchedulerFactoryBean schedulerFactoryBean() {

@@ -1,8 +1,6 @@
 package com.bootdo.activiti.service.impl;
 
 import com.bootdo.activiti.config.ActivitiConstant;
-import com.bootdo.common.utils.StringUtils;
-import org.activiti.engine.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,10 +40,11 @@ public class SalaryServiceImpl implements SalaryService {
 	@Transactional(rollbackFor=Exception.class)
 	@Override
 	public int save(SalaryDO salary){
-			salary.setId(UUID.randomUUID().toString().replace("-",""));
-			actTaskService.startProcess(ActivitiConstant.ACTIVITI_SALARY[0],ActivitiConstant.ACTIVITI_SALARY[1],salary.getId(),salary.getContent(),new HashMap<>());
-			return salaryDao.save(salary);
+		salary.setId(UUID.randomUUID().toString().replace("-",""));
+		actTaskService.startProcess(ActivitiConstant.ACTIVITI_SALARY[0],ActivitiConstant.ACTIVITI_SALARY[1],salary.getId(),salary.getContent(),new HashMap<>());
+		return salaryDao.save(salary);
 	}
+
 	@Transactional(rollbackFor=Exception.class)
 	@Override
 	public int update(SalaryDO salary){
@@ -65,5 +64,4 @@ public class SalaryServiceImpl implements SalaryService {
 	public int batchRemove(String[] ids){
 		return salaryDao.batchRemove(ids);
 	}
-	
 }
