@@ -74,6 +74,7 @@ public class DictServiceImpl implements DictService {
     public List<DictDO> getHobbyList(UserDO userDO) {
         Map<String, Object> param = new HashMap<>(16);
         param.put("type", "hobby");
+        
         List<DictDO> hobbyList = dictDao.list(param);
 
         if (StringUtils.isNotEmpty(userDO.getHobby())) {

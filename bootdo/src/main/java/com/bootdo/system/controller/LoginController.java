@@ -40,7 +40,6 @@ public class LoginController extends BaseController {
 
     @GetMapping({"/", ""})
     String welcome(Model model) {
-
         return "redirect:/blog";
     }
 
@@ -48,11 +47,13 @@ public class LoginController extends BaseController {
     @GetMapping({"/index"})
     String index(Model model) {
         List<Tree<MenuDO>> menus = menuService.listMenuTree(getUserId());
+
         model.addAttribute("menus", menus);
-        model.addAttribute("name", getUser().getName());
+        model.addAttribute("name",  getUser().getName());
+
         FileDO fileDO = fileService.get(getUser().getPicId());
         if (fileDO != null && fileDO.getUrl() != null) {
-            if (fileService.isExist(fileDO.getUrl())) {
+            if (fileService.isExist(fileDO.getUrl())) {     // sys_file.url表中文件是否存在{uploadPath}
                 model.addAttribute("picUrl", fileDO.getUrl());
             } else {
                 model.addAttribute("picUrl", "/img/photo_s.jpg");
@@ -60,7 +61,9 @@ public class LoginController extends BaseController {
         } else {
             model.addAttribute("picUrl", "/img/photo_s.jpg");
         }
+
         model.addAttribute("username", getUser().getUsername());
+
         return "index_v1";
     }
 
@@ -95,7 +98,6 @@ public class LoginController extends BaseController {
 
     @GetMapping("/main")
     String main() {
-        return "main";
+    	return "main";
     }
-
 }

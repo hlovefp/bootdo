@@ -6,11 +6,8 @@ import org.springframework.stereotype.Component;
 @Component
 @ConfigurationProperties(prefix="bootdo")
 public class BootdoConfig {
-	//上传路径
-	private String uploadPath;
-
+	private String uploadPath;  // 上传路径
 	private String username;
-
 	private String password;
 
 	public String getUploadPath() {

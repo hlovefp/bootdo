@@ -1,10 +1,12 @@
 /*this is basic form validation using for validation person's basic information author:Clara Guo data:2017/07/20*/
 $(document).ready(function(){
-	$.validator.setDefaults({       
-		  submitHandler: function(form) {    
-		 		form.submit();    
-		}       
-	});  
+	
+	$.validator.setDefaults({
+		submitHandler: function(form) {
+		 	form.submit();    
+		}
+	});
+	
 	//手机号码验证身份证正则合并：(^\d{15}$)|(^\d{17}([0-9]|X)$)
 	jQuery.validator.addMethod("isPhone",function(value,element){
 		var length = value.length;
@@ -43,41 +45,31 @@ $(document).ready(function(){
 		var p2=$("#pwdNew").val();
 		if(p1==p2){
 			return false;
-		}else{
-			 return true;
 		}
-		});
+		return true;
+	});
 	//校验新密码和确认密码是否相同
 	jQuery.validator.addMethod("issame",function(){
 		var p3=$("#confirm_password").val();
 		var p4=$("#pwdNew").val();
 		if(p3==p4){
 			return true;
-		}else{
-			 return false;
 		}
-		});
+		return false;
+	});
+
 	//校验基础信息表单
 	$("#basicInfoForm").validate({
 		errorElement:'span',
 		errorClass:'help-block error-mes',
 		rules:{
-			name:{
-				required:true,
-				isName:true
-			},
+			name:{ required:true, isName:true },
 			sex:"required",
 			birth:"required",
-            mobile:{
-				required:true,
-				isPhone:true
-			},
-			email:{
-				required:true,
-				email:true
-			}
+            mobile:{ required:true, isPhone:true },
+			email:{ required:true, email:true }
 		},
-		messages:{
+		messages:{  // 如果某个控件没在 messages，将调用默认的信息 messages_zh.min.js
 			name:{
 				required:"请输入中文姓名",
 				isName:"姓名只能为汉字"
@@ -106,22 +98,26 @@ $(document).ready(function(){
 		highlight:function(element){
 			$(element).closest('.gg-formGroup').addClass('has-error has-feedback');
 		},
+		
 		success:function(label){
 			var el = label.closest('.gg-formGroup').find("input");
 			el.next().remove();
 			label.closest('.gg-formGroup').removeClass('has-error').addClass("has-feedback has-success");
 			label.remove();
 		},
+		
 		submitHandler:function(form){
 			alert("保存成功!");
 		}
 	});
-	
+
 	//校验修改密码表单
 	$("#modifyPwd").validate({
-		onfocusout: function(element) { $(element).valid()},
-		 debug:false, //表示校验通过后是否直接提交表单
-		 onkeyup:false, //表示按键松开时候监听验证
+		onfocusout: function(element) {
+			$(element).valid()
+		},
+		debug:false, 	// 表示校验通过后是否直接提交表单
+		onkeyup:false, 	// 表示按键松开时候监听验证
 		rules:{
 			pwdOld:{
 				required:true,
@@ -133,37 +129,32 @@ $(document).ready(function(){
 			   isdiff:true,
 			   //issame:true,
 		   },
-			confirm_password:{
+		   confirm_password:{
 			  required:true,
 			  minlength:6,
 			  issame:true,
-			}
-		  
-		   },
+		   }
+		},
 		messages:{
-			 	pwdOld : {
-					 required:'必填',
-					 minlength:$.validator.format('密码长度要大于6')
-				},
-            	pwdNew:{
-				   required:'必填',
-				   minlength:$.validator.format('密码长度要大于6'),
-				   isdiff:'原密码与新密码不能重复',
-				  
-			   },
-				confirm_password:{
-				   required:'必填',
-				   minlength:$.validator.format('密码长度要大于6'),
-				   issame:'新密码要与确认新密码一致',
-				}
-		
+			pwdOld : {
+				required:'必填',
+				minlength:$.validator.format('密码长度要大于6')
+			},
+        	pwdNew:{
+        		required:'必填',
+        		minlength:$.validator.format('密码长度要大于6'),
+        		isdiff:'原密码与新密码不能重复',
+		   },
+		   confirm_password:{
+			   required:'必填',
+			   minlength:$.validator.format('密码长度要大于6'),
+			   issame:'新密码要与确认新密码一致',
+		   }
 		},
 		errorElement:"mes",
 		errorClass:"gg-star",
-		errorPlacement: function(error, element) 
-		{ 
+		errorPlacement: function(error, element){ 
 			element.closest('.gg-formGroup').append(error);
-
 		}
 	});
 });

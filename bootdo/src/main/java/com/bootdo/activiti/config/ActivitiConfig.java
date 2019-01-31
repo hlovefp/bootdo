@@ -13,12 +13,13 @@ import javax.sql.DataSource;
 public class ActivitiConfig {
     //流程配置，与spring整合采用SpringProcessEngineConfiguration这个实现
     @Bean
-    public ProcessEngineConfiguration processEngineConfiguration(DataSource dataSource, PlatformTransactionManager transactionManager){
+    public ProcessEngineConfiguration processEngineConfiguration(DataSource dataSource,
+    										PlatformTransactionManager transactionManager){
         SpringProcessEngineConfiguration processEngineConfiguration = new SpringProcessEngineConfiguration();
+
         processEngineConfiguration.setDataSource(dataSource);
         processEngineConfiguration.setDatabaseSchemaUpdate("true");
         processEngineConfiguration.setDatabaseType("mysql");
-
         processEngineConfiguration.setTransactionManager(transactionManager);
 
         //流程图字体
@@ -33,7 +34,9 @@ public class ActivitiConfig {
     @Bean
     public ProcessEngineFactoryBean processEngine(ProcessEngineConfiguration processEngineConfiguration){
         ProcessEngineFactoryBean processEngineFactoryBean = new ProcessEngineFactoryBean();
+
         processEngineFactoryBean.setProcessEngineConfiguration((ProcessEngineConfigurationImpl) processEngineConfiguration);
+
         return processEngineFactoryBean;
     }
 

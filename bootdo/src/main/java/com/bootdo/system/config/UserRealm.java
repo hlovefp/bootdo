@@ -8,6 +8,7 @@ import com.bootdo.common.config.ApplicationContextRegister;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -54,7 +55,7 @@ public class UserRealm extends AuthorizingRealm {
 
 		// 密码错误
 		if (!password.equals(user.getPassword())) {
-			// throw new IncorrectCredentialsException("账号或密码不正确");
+			throw new IncorrectCredentialsException("账号或密码不正确");
 		}
 
 		// 账号锁定

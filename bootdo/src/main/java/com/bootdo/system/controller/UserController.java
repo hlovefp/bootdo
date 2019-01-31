@@ -33,13 +33,17 @@ import java.util.Map;
 @RequestMapping("/sys/user")
 @Controller
 public class UserController extends BaseController {
-	private String prefix="system/user"  ;
+	private String prefix="system/user";
+
 	@Autowired
 	UserService userService;
+	
 	@Autowired
 	RoleService roleService;
+	
 	@Autowired
 	DictService dictService;
+
 	@RequiresPermissions("sys:user:user")
 	@GetMapping("")
 	String user(Model model) {
@@ -216,11 +220,14 @@ public class UserController extends BaseController {
 	@GetMapping("/personal")
 	String personal(Model model) {
 		UserDO userDO  = userService.get(getUserId());
+		
 		model.addAttribute("user",userDO);
 		model.addAttribute("hobbyList",dictService.getHobbyList(userDO));
 		model.addAttribute("sexList",dictService.getSexList());
+		
 		return prefix + "/personal";
 	}
+
 	@ResponseBody
 	@PostMapping("/uploadImg")
 	R uploadImg(@RequestParam("avatar_file") MultipartFile file, String avatar_data, HttpServletRequest request) {

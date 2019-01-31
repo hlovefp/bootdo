@@ -10,17 +10,12 @@ public class UserDO implements Serializable {
     private static final long serialVersionUID = 1L;
     //
     private Long userId;
-    // 用户名
-    private String username;
-    // 用户真实姓名
-    private String name;
-    // 密码
-    private String password;
-    // 部门
-    private Long deptId;
+    private String username;       	// 用户名
+    private String name;        	// 用户真实姓名
+    private String password;		// 密码
+    private Long deptId;			// 部门
     private String deptName;
-    // 邮箱
-    private String email;
+    private String email; 			// 邮箱
     // 手机号
     private String mobile;
     // 状态 0:禁用，1:正常

@@ -132,8 +132,7 @@
 
 
 	<select id="countDTO" resultType="int">
-		select count(*)
-		from
+		select count(*) from
 		oa_notify_record r right JOIN oa_notify n on r.notify_id
 		= n.id where
 		r.user_id =#{userId} and
@@ -141,9 +140,9 @@
 	</select>
 
 	<select id="listDTO" resultType="com.bootdo.oa.domain.NotifyDTO">
-		select DISTINCT
-		n.id ,`type`,`title`,`content`,`files`,r.is_read,`status`,`create_by`,`create_date`,`update_by`,`update_date`,`remarks`,`del_flag`
-		from oa_notify_record r right JOIN oa_notify n on r.notify_id = n.id
+		select DISTINCT n.id ,`type`,`title`,`content`,`files`,r.is_read,`status`,
+		       `create_by`,`create_date`,`update_by`,`update_date`,`remarks`,`del_flag`
+		  from oa_notify_record r right join oa_notify n on r.notify_id = n.id
 		<where>
 			<if test="id != null and id != ''"> and r.id = #{id} </if>
 			<if test="notifyId != null and notifyId != ''"> and r.notify_id = #{notifyId} </if>
@@ -152,10 +151,7 @@
 			<if test="readDate != null and readDate != ''"> and r.read_date = #{readDate} </if>
 		</where>
 		order by is_read ASC, update_date DESC
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-		
+		<if test="offset != null and limit != null"> limit #{offset}, #{limit} </if>
 	</select>
 
 </mapper>

@@ -151,7 +151,7 @@ public class NotifyController extends BaseController {
 		Query query = new Query(params);
         query.put("userId", getUserId());
         query.put("isRead",Constant.OA_NOTIFY_READ_NO);
-		return notifyService.selfList(query);
+		return notifyService.selfList(query);            // oa_notify oa_notify_record
 	}
 
 	@GetMapping("/selfNotify")

@@ -1,23 +1,19 @@
-//自定义js
-
-//公共配置
-
 
 $(document).ready(function () {
 
     // MetsiMenu
     $('#side-menu').metisMenu();
 
-    // 打开右侧边栏
+    // 显示与隐藏主题内容
     $('.right-sidebar-toggle').click(function () {
-        $('#right-sidebar').toggleClass('sidebar-open');
+        $('#right-sidebar').toggleClass('sidebar-open'); // style.css
     });
 
-    // 右侧边栏使用slimscroll
+    // 主题内容使用 jQuery滚动条插件slimScroll
     $('.sidebar-container').slimScroll({
-        height: '100%',
-        railOpacity: 0.4,
-        wheelStep: 10
+        height: '100%',      // 可滚动区域高度
+        railOpacity: 0.4,    // 轨道透明度
+        wheelStep: 10        // 滚轮滚动量
     });
 
     // 打开聊天窗口

@@ -22,6 +22,7 @@ public class FileServiceImpl implements FileService {
 
 	@Autowired
 	private BootdoConfig bootdoConfig;
+
 	@Override
 	public FileDO get(Long id){
 		return sysFileMapper.get(id);
@@ -70,4 +71,4 @@ public class FileServiceImpl implements FileService {
 		}
 		return isExist;
 	}
-	}
+}

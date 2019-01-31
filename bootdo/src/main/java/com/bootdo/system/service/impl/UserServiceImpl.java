@@ -35,6 +35,8 @@ import javax.imageio.ImageIO;
 @Transactional
 @Service
 public class UserServiceImpl implements UserService {
+	// private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+
     @Autowired
     UserDao userMapper;
     @Autowired
@@ -47,15 +49,19 @@ public class UserServiceImpl implements UserService {
     private BootdoConfig bootdoConfig;
     @Autowired
     DeptService deptService;
-    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
+    
 
     @Override
 //    @Cacheable(value = "user",key = "#id")
     public UserDO get(Long id) {
-        List<Long> roleIds = userRoleMapper.listRoleId(id);
+
         UserDO user = userMapper.get(id);
+        
         user.setDeptName(deptMapper.get(user.getDeptId()).getName());
+        
+        List<Long> roleIds = userRoleMapper.listRoleId(id);
         user.setRoleIds(roleIds);
+
         return user;
     }
 
@@ -217,19 +223,17 @@ public class UserServiceImpl implements UserService {
         String fileName = file.getOriginalFilename();
         fileName = FileUtil.renameToUUID(fileName);
         FileDO sysFile = new FileDO(FileType.fileType(fileName), "/files/" + fileName, new Date());
-        //获取图片后缀
-        String prefix = fileName.substring((fileName.lastIndexOf(".") + 1));
+        
+        String prefix = fileName.substring((fileName.lastIndexOf(".") + 1));  // 获取图片后缀
+        
+        // {"x":50.00000000000001,"y":50.00000000000001,"height":400,"width":400,"rotate":0}
         String[] str = avatar_data.split(",");
-        //获取截取的x坐标
-        int x = (int) Math.floor(Double.parseDouble(str[0].split(":")[1]));
-        //获取截取的y坐标
-        int y = (int) Math.floor(Double.parseDouble(str[1].split(":")[1]));
-        //获取截取的高度
-        int h = (int) Math.floor(Double.parseDouble(str[2].split(":")[1]));
-        //获取截取的宽度
-        int w = (int) Math.floor(Double.parseDouble(str[3].split(":")[1]));
-        //获取旋转的角度
-        int r = Integer.parseInt(str[4].split(":")[1].replaceAll("}", ""));
+        int x = (int) Math.floor(Double.parseDouble(str[0].split(":")[1]));  //获取截取的x坐标
+        int y = (int) Math.floor(Double.parseDouble(str[1].split(":")[1]));  //获取截取的y坐标
+        int h = (int) Math.floor(Double.parseDouble(str[2].split(":")[1]));  //获取截取的高度
+        int w = (int) Math.floor(Double.parseDouble(str[3].split(":")[1]));  //获取截取的宽度
+        int r = Integer.parseInt(str[4].split(":")[1].replaceAll("}", ""));  //获取旋转的角度
+        
         try {
             BufferedImage cutImage = ImageUtils.cutImage(file, x, y, w, h, prefix);
             BufferedImage rotateImage = ImageUtils.rotateImage(cutImage, r);

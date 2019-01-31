@@ -9,19 +9,15 @@
 
 	<select id="list" resultType="com.bootdo.common.domain.FileDO">
 		select `id`,`type`,`url`,`create_date` from sys_file
-        <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="type != null and type != ''"> and type = #{type} </if>
-		  		  <if test="url != null and url != ''"> and url = #{url} </if>
-		  		  <if test="createDate != null and createDate != ''"> and create_date = #{createDate} </if>
-		  		</where>
+        <where>
+  		  <if test="id != null and id != ''"> and id = #{id} </if>
+  		  <if test="type != null and type != ''"> and type = #{type} </if>
+  		  <if test="url != null and url != ''"> and url = #{url} </if>
+  		  <if test="createDate != null and createDate != ''"> and create_date = #{createDate} </if>
+		</where>
         <choose>
-            <when test="sort != null and sort.trim() != ''">
-                order by ${sort} ${order}
-            </when>
-			<otherwise>
-                order by id desc
-			</otherwise>
+            <when test="sort != null and sort.trim() != ''"> order by ${sort} ${order} </when>
+			<otherwise> order by id desc </otherwise>
         </choose>
 		<if test="offset != null and limit != null">
 			limit #{offset}, #{limit}
@@ -29,13 +25,13 @@
 	</select>
 	
  	<select id="count" resultType="int">
-		select count(*) from sys_file
-		 <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="type != null and type != ''"> and type = #{type} </if>
-		  		  <if test="url != null and url != ''"> and url = #{url} </if>
-		  		  <if test="createDate != null and createDate != ''"> and create_date = #{createDate} </if>
-		  		</where>
+	   select count(*) from sys_file
+	   <where>  
+  		  <if test="id != null and id != ''"> and id = #{id} </if>
+  		  <if test="type != null and type != ''"> and type = #{type} </if>
+  		  <if test="url != null and url != ''"> and url = #{url} </if>
+  		  <if test="createDate != null and createDate != ''"> and create_date = #{createDate} </if>
+	   </where>
 	</select>
 	 
 	<insert id="save" parameterType="com.bootdo.common.domain.FileDO" useGeneratedKeys="true" keyProperty="id">

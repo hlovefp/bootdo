@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>欢迎页</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+
+	<button type="button" class="btn btn-primary" onclick="exportExcel(1)">
+		<i class="fa fa-export" aria-hidden="true"></i>导出当页数据
+	</button>
+	<button type="button" class="btn btn-primary" onclick="exportExcel(2)">
+		<i class="fa fa-export" aria-hidden="true"></i>导出全部数据
+	</button>
+	<button type="button" class="btn btn-primary" onclick="exportExcel(3)">
+		<i class="fa fa-export" aria-hidden="true"></i>导出符合条件全部数据
+	</button>
+
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="js/openTab.js"></script>
+<script>
+
+// type导出的类型:1 导出当页数据 2 导出全部数据 3 导出符合条件全部数据
+function exportExcel(type) {
+    //获取table的分页参数值
+    /*
+    var offset = $('#exampleTable').bootstrapTable('getOptions').pageSize;
+    var limit  = $('#exampleTable').bootstrapTable('getOptions').pageNumber * offset;
+    */
+    data = "type=" + type
+         + "&limit=" + 3
+         + "&offset=" + 1;
+    //后端导出的方法
+    document.location.href = "/download/exportExcel?" + data;
+}
+</script>
+</html>

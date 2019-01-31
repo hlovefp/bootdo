@@ -51,10 +51,10 @@ public class GenUtils {
      */
 
 
-    public static void generatorCode(Map<String, String> table,
-                                     List<Map<String, String>> columns, ZipOutputStream zip) {
+    public static void generatorCode(Map<String, String> table, List<Map<String, String>> columns, ZipOutputStream zip) {
         //配置信息
         Configuration config = getConfig();
+
         //表信息
         TableDO tableDO = new TableDO();
         tableDO.setTableName(table.get("tableName"));

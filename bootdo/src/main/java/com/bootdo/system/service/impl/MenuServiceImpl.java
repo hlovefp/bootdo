@@ -37,7 +37,7 @@ public class MenuServiceImpl implements MenuService {
 			tree.setParentId(sysMenuDO.getParentId().toString());
 			tree.setText(sysMenuDO.getName());
 			Map<String, Object> attributes = new HashMap<>(16);
-			attributes.put("url", sysMenuDO.getUrl());
+			attributes.put("url",  sysMenuDO.getUrl() );
 			attributes.put("icon", sysMenuDO.getIcon());
 			tree.setAttributes(attributes);
 			trees.add(tree);

@@ -119,6 +119,7 @@ public class NotifyServiceImpl implements NotifyService {
     @Override
     public PageUtils selfList(Map<String, Object> map) {
         List<NotifyDTO> rows = notifyDao.listDTO(map);
+        
         for (NotifyDTO notifyDTO : rows) {
             notifyDTO.setBefore(DateUtils.getTimeBefore(notifyDTO.getUpdateDate()));
             notifyDTO.setSender(userDao.get(notifyDTO.getCreateBy()).getName());

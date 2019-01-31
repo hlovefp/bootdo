@@ -2903,7 +2903,7 @@ a.forum-item-title:hover {
     overflow: hidden;
     position: fixed;
     top: 60px;
-    width: 260px !important;
+    width: 260px !important;   /* 提高指定样式规则的应用优先权 具有最高优先级*/
     z-index: 1009;
     bottom: 0;
     right: -260px;

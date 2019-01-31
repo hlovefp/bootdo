@@ -6,44 +6,44 @@ $(function(){
 		radioClass: 'iradio_square-green'
 	});
 	$(".gg-faeye").on('mouseover',function(){
-		$('#pwdOld').prop('type', 'text'); 
+		$('#pwdOld').prop('type', 'text');
+		$('#pwdNew').prop('type', 'text');
 		$('#pwd').prop('type', 'text');
 		$('#confirm_password').prop('type', 'text'); 
 	});
 	$(".gg-faeye").on('mouseout',function(){
 		$('#pwdOld').prop('type', 'password');
-		$('#pwd').prop('type', 'password'); 
+		$('#pwdNew').prop('type', 'password');
+		$('#pwd').prop('type', 'password');
 		$('#confirm_password').prop('type', 'password');
 	});
 });
+
 /*头像裁剪*/
 (function (factory) {
-  if (typeof define === 'function' && define.amd) {
-    define(['jquery'], factory);
-  } else if (typeof exports === 'object') {
-    // Node / CommonJS
-    factory(require('jquery'));
-  } else {
-    factory(jQuery);
-  }
-})(function ($) {
-
+	if (typeof define === 'function' && define.amd) {
+		define(['jquery'], factory);
+	} else if (typeof exports === 'object') {    // Node / CommonJS
+		factory(require('jquery'));
+	} else {
+		factory(jQuery);
+	}
+})(function ($){
   'use strict';
 
   var console = window.console || { log: function () {} };
 
   function CropAvatar($element) {
     this.$ggcontainer = $element;
-    this.$loading = this.$ggcontainer.find('.loading');
-	
-    this.$avatarForm = this.$ggcontainer.find('.avatar-form');
-    this.$avatar = this.$avatarForm.find('img');
-    this.$avatarUpload = this.$avatarForm.find('.avatar-upload');
-    this.$avatarSrc = this.$avatarForm.find('.avatar-src');
-    this.$avatarData = this.$avatarForm.find('.avatar-data');
+    this.$loading     = this.$ggcontainer.find('.loading');
+    this.$avatarForm  = this.$ggcontainer.find('.avatar-form');
+    this.$avatar      = this.$avatarForm.find('img');
+    this.$avatarUpload= this.$avatarForm.find('.avatar-upload');
+    this.$avatarSrc   = this.$avatarForm.find('.avatar-src');
+    this.$avatarData  = this.$avatarForm.find('.avatar-data');
     this.$avatarInput = this.$avatarForm.find('.avatar-input');
-    this.$avatarSave = this.$avatarForm.find('.avatar-save');
-    this.$avatarBtns = this.$avatarForm.find('.avatar-btns');
+    this.$avatarSave  = this.$avatarForm.find('.avatar-save');
+    this.$avatarBtns  = this.$avatarForm.find('.avatar-btns');
 
     this.$avatarWrapper = this.$avatarForm.find('.avatar-wrapper');
     this.$avatarPreview = this.$avatarForm.find('.avatar-preview');
@@ -61,64 +61,61 @@ $(function(){
       formData: !!window.FormData
     },
 
-    init: function () {
-      this.support.datauri = this.support.fileList && this.support.blobURLs;
+	init: function () {
+		this.support.datauri = this.support.fileList && this.support.blobURLs;
 
-      if (!this.support.formData) {
-        this.initIframe();
-      }
+		if (!this.support.formData) {
+			this.initIframe();
+		}
 
-      this.addListener();
+		this.addListener();
     },
 
     addListener: function () {
-      this.$avatarInput.on('change', $.proxy(this.change, this));
-      this.$avatarForm.on('submit', $.proxy(this.submit, this));
-      this.$avatarBtns.on('click', $.proxy(this.rotate, this));
+    	this.$avatarInput.on('change', $.proxy(this.change, this));
+    	this.$avatarForm.on('submit', $.proxy(this.submit, this));
+    	this.$avatarBtns.on('click', $.proxy(this.rotate, this));
     },
     
     initPreview: function () {
-      var url = this.$avatar.attr('src');
+    	var url = this.$avatar.attr('src');
 
-      this.$avatarPreview.empty().html('<img src="' + url + '">');
+    	this.$avatarPreview.empty().html('<img src="' + url + '">');
     },
 
     initIframe: function () {
-      var target = 'upload-iframe-' + (new Date()).getTime(),
-          $iframe = $('<iframe>').attr({
+    	var target = 'upload-iframe-' + (new Date()).getTime(),
+          	$iframe = $('<iframe>').attr({
             name: target,
             src: ''
           }),
           _this = this;
 
-      // Ready ifrmae
-      $iframe.one('load', function () {
-
-        // respond response
-        $iframe.on('load', function () {
-          var data;
-
-          try {
-            data = $(this).contents().find('body').text();
-          } catch (e) {
-            console.log(e.message);
-          }
-
-          if (data) {
-            try {
-              data = $.parseJSON(data);
-            } catch (e) {
-              console.log(e.message);
-            }
-
-            _this.submitDone(data);
-          } else {
-            _this.submitFail('Image upload failed!');
-          }
-
-          _this.submitEnd();
-
-        });
+    	// Ready ifrmae
+    	$iframe.one('load', function () {
+	        // respond response
+	        $iframe.on('load', function () {
+		    	var data;
+			  try {
+			    data = $(this).contents().find('body').text();
+			  } catch (e) {
+			    console.log(e.message);
+			  }
+			
+			  if (data) {
+			    try {
+			      data = $.parseJSON(data);
+			    } catch (e) {
+			      console.log(e.message);
+			    }
+			
+			  	_this.submitDone(data);
+			  } else {
+				  _this.submitFail('Image upload failed!');
+			  }
+			
+			  _this.submitEnd();
+	        });
       });
 
       this.$iframe = $iframe;
@@ -126,8 +123,7 @@ $(function(){
     },
     
     change: function () {
-      var files,
-          file;
+      var files, file;
 
       if (this.support.datauri) {
         files = this.$avatarInput.prop('files');

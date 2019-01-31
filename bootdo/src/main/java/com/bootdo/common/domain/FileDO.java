@@ -13,20 +13,15 @@ import java.util.Date;
 public class FileDO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    //
     private Long id;
-    // 文件类型
-    private Integer type;
-    // URL地址
-    private String url;
-    // 创建时间
-    private Date createDate;
+    private Integer type;     // 文件类型
+    private String url;       // URL地址
+    private Date createDate;  // 创建时间
 
 
     public FileDO() {
         super();
     }
-
 
     public FileDO(Integer type, String url, Date createDate) {
         super();
@@ -34,7 +29,6 @@ public class FileDO implements Serializable {
         this.url = url;
         this.createDate = createDate;
     }
-
 
     /**
      * 设置：

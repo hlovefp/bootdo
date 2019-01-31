@@ -12,7 +12,7 @@ public class  PageUtils implements Serializable {
 	private List<?> rows;
 
 	public PageUtils(List<?> list, int total) {
-		this.rows = list;
+		this.rows  = list;
 		this.total = total;
 	}
 
@@ -31,5 +31,4 @@ public class  PageUtils implements Serializable {
 	public void setRows(List<?> rows) {
 		this.rows = rows;
 	}
-
 }
